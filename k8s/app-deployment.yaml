@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-app
+  template:
+    metadata:
+      labels:
+        app: laravel-app
+    spec:
+      containers:
+        - name: app
+          image: laravel-app:latest  # Build this image separately and push to a registry or use local dev registry
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - mountPath: /var/www
+              name: app-code
+      volumes:
+        - name: app-code
+          hostPath:
+            path: /path/to/your/laravel/app  # Adjust to your actual path
+            type: Directory
