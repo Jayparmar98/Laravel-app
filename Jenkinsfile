@@ -12,22 +12,31 @@ pipeline {
             }
         }
 
-    //     stage('Build Docker Image') {
+    stage('Build Docker Image') {
+            steps {
+                bat 'docker-compose up -d .'
+            }
+        }
+
+    //     stage('Tag and Push to Local Registry') {
     //         steps {
-    //             sh 'docker build -t $IMAGE:latest .'
+    //             bat 'docker tag %IMAGE%:latest %REGISTRY%/%IMAGE%:latest'
+    //             bat 'docker push %REGISTRY%/%IMAGE%:latest'
     //         }
     //     }
 
     //     stage('Deploy to Kubernetes') {
     //         steps {
-    //             sh 'kubectl apply -f k8s/'
+    //             bat 'kubectl apply -f k8s\\deployment.yaml'
+    //             bat 'kubectl apply -f k8s\\service.yaml'
+    //             bat 'kubectl apply -f k8s\\configmap.yaml'
     //         }
     //     }
     // }
 
     // post {
     //     success {
-    //         echo '✔ Deployment successful!'
+    //         echo '✅ Deployment succeeded!'
     //     }
     //     failure {
     //         echo '❌ Deployment failed.'
