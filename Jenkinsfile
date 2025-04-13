@@ -14,6 +14,7 @@ pipeline {
 
     stage('Build Docker Image') {
             steps {
+                 bat 'cd ./docker'
                 bat 'docker build -t Laravel-curd-app:v1.0'
             }
         }
