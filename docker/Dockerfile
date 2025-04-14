@@ -25,7 +25,7 @@ RUN chown -R www-data:www-data /var/www \
 
 RUN composer install --no-dev --optimize-autoloader
 
-COPY .env.example .env
+COPY .env.develop .env
 
 RUN php artisan key:generate
 
@@ -35,7 +35,7 @@ RUN chmod -R 777 storage bootstrap/cache
 EXPOSE 80
 
 # Configure Nginx (basic configuration - adjust as needed)
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Set user for artisan commands
 USER www-data
